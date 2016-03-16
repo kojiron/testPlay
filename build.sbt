@@ -33,6 +33,7 @@ routesGenerator := InjectedRoutesGenerator
 lazy val slick = TaskKey[Seq[File]]("gen-tables")
 lazy val slickCodeGenTask = (sourceManaged , dependencyClasspath in Compile, runner in Compile, streams) map { (dir , cp , r , s) =>
   val outputDir = (dir / "slick").getPath
+//  val outputDir = "app/"
   val url = "jdbc:mysql://localhost/dietserver"
   val jdbcDriver = "com.mysql.jdbc.Driver"
   val slickDriver = "slick.driver.MySQLDriver"
