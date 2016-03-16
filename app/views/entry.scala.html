@@ -70,34 +70,6 @@
 <button data-toggle="modal" data-target="#confilm" id="make" name="makeButton" class="btn btn-default" data-whatever=""; data-whatever2=""; >作成</button>
 </p>
 
-<script>
-
-$(function() {
-  // ダイアログ表示前にJavaScriptで操作する
-  $('#confilm').on('show.bs.modal', function(event) {
-
-    //document.btns.makeButton.data-whatever = "$('#nickname').val()";
-    //alert($('#nickname').val());
-
-    //var recipient = $(event.relatedTarget).data('whatever');
-    //$(this).find('.modal-body .recipient').text(recipient);
-    $(this).find('.modal-body .recipient').text($('#nickname').val());
-    //var recipient2 = $(event.relatedTarget).data('whatever2');
-    $(this).find('.modal-body .recipient2').text($('#email').val());
-    $(this).find('.modal-body .recipient3').text($('#password').val());
-    $(this).find('.modal-body .recipient4').text($("[name=sex]:checked").val());
-    $(this).find('.modal-body .recipient5').text($('#height').val());
-    $(this).find('.modal-body .recipient6').text($('#weight').val());
-
-    //nickname = $('#nickname').val();
-    //alert(nickname);
-  });
-});
-
-
-
-</script>
-
 <div class="modal fade" id="confilm" role="dialog" tabindex="-1">
 <div class="modal-dialog modal-dialog-center">
 <div class="modal-content">
@@ -138,7 +110,7 @@ $(function() {
 </div>
 <div class="modal-footer">
 <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
-<button type="button" class="btn btn-primary" id="btn-create">登録</button>
+<button type="button" class="btn btn-primary" id="create">登録</button>
 </div>
 </div>
 </div>
@@ -146,5 +118,56 @@ $(function() {
 
 <p>Copyright &copy; DODO's Diet Dialy.</p>
 </div>
+
+<script>
+
+$(function() {
+  // ダイアログ表示前にJavaScriptで操作する
+  $('#confilm').on('show.bs.modal', function(event) {
+
+    //document.btns.makeButton.data-whatever = "$('#nickname').val()";
+    //alert($('#nickname').val());
+
+    //var recipient = $(event.relatedTarget).data('whatever');
+    //$(this).find('.modal-body .recipient').text(recipient);
+    $(this).find('.modal-body .recipient').text($('#nickname').val());
+    //var recipient2 = $(event.relatedTarget).data('whatever2');
+    $(this).find('.modal-body .recipient2').text($('#email').val());
+    $(this).find('.modal-body .recipient3').text($('#password').val());
+    $(this).find('.modal-body .recipient4').text($("[name=sex]:checked").val());
+    $(this).find('.modal-body .recipient5').text($('#height').val());
+    $(this).find('.modal-body .recipient6').text($('#weight').val());
+
+    //nickname = $('#nickname').val();
+    //alert(nickname);
+  });
+});
+
+      $('#create').click(function() {
+
+          var user = {};
+          user.nickname = $('#nickname').val();
+          user.email = $('#email').val();
+          user.password = $('#password').val();
+          user.sex = $("[name=sex]:checked").val()
+          user.height = parseFloat($('#height').val());
+          user.weight = parseFloat($('#weight').val());
+
+          $.ajax({
+            type: 'POST' ,
+            url: '/create' ,
+            contentType: 'application/JSON' , 
+            data: JSON.stringify(user) ,
+            success: function(msg) {
+                location.reload();
+            } ,
+            error: function(msg) {
+              //TODO: エラー処理
+              alert("Error...");
+            }
+          }); 
+      });
+</script>
+
 </body>
 </html>

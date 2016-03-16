@@ -2,9 +2,14 @@ package controllers
 
 import play.api._
 import play.api.mvc._
-
 import play.api.data.Form
 import play.api.data.Forms._
+
+import javax.inject.Inject
+import play.api.libs.concurrent.Execution.Implicits.defaultContext
+import play.api.libs.json.Json
+import scala.concurrent.Future
+import play.api.libs.json.Reads
 
 class Application extends Controller {
 
@@ -21,6 +26,10 @@ class Application extends Controller {
     Ok(views.html.page2("引数1")("引数2")("引数3"))
   }
 
+
+  def create = Action {
+    Ok(Json.obj())
+  }
 
 
 //  case class User(nickname: String, email: String, password: String, sex: Int, height: Int, weight: Int)//, photo: Blob)

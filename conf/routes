@@ -7,6 +7,7 @@ GET     /                           controllers.Application.index
 GET     /test                       controllers.Application.hello
 GET     /test2                      controllers.Application.page2
 POST    /made                       controllers.Application.made
+POST    /create                     controllers.Application.create
 
 
 # Map static resources from the /public folder to the /assets URL path
